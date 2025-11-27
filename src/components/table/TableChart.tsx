@@ -15,14 +15,14 @@ import type { Payment } from '@/api/payments/type';
 function getStatusIcon(status: Payment['status']) {
   switch (status) {
     case 'SUCCESS':
-      return <IconCircleCheckFilled className='mr-1 w-5 h-5 fill-green-500' />;
+      return <IconCircleCheckFilled className='w-5 h-5 fill-green-500' />;
     case 'FAILED':
-      return <IconX className='mr-1 w-5 h-5 text-red-500' />;
+      return <IconX className='w-5 h-5 text-red-500' />;
     case 'CANCELLED':
-      return <IconBan className='mr-1 w-5 h-5 text-gray-500' />;
+      return <IconBan className='w-5 h-5 text-gray-500' />;
     case 'PENDING':
     default:
-      return <IconLoader className='mr-1 w-5 h-5 text-yellow-500' />;
+      return <IconLoader className='w-5 h-5 text-yellow-500' />;
   }
 }
 
@@ -56,7 +56,10 @@ export default function TableChart({ data }: { data: Payment[] }) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Badge variant='outline' className='text-muted-foreground  rounded-full'>
+                  <Badge
+                    variant='outline'
+                    className='text-muted-foreground  rounded-full flex items-center gap-1 px-2 py-1 w-fit'
+                  >
                     {getStatusIcon(row.status)}
                     {row.status}
                   </Badge>
