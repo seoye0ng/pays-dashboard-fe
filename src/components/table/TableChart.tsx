@@ -58,7 +58,6 @@ export default function TableChart({ data }: { data: Payment[] }) {
                 <TableCell>
                   <Badge variant='outline' className='text-muted-foreground  rounded-full'>
                     {getStatusIcon(row.status)}
-                    <IconLoader className='mr-1 w-5' />
                     {row.status}
                   </Badge>
                 </TableCell>
