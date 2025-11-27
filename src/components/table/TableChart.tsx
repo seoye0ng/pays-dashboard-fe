@@ -12,6 +12,13 @@ import {
 
 import type { Payment } from '@/api/payments/type';
 
+function formatAmount(amount: string, currency: string) {
+  return new Intl.NumberFormat('ko-KR', {
+    style: 'currency',
+    currency,
+  }).format(Number(amount));
+}
+
 function getStatusIcon(status: Payment['status']) {
   switch (status) {
     case 'SUCCESS':
@@ -64,7 +71,7 @@ export default function TableChart({ data }: { data: Payment[] }) {
                     {row.status}
                   </Badge>
                 </TableCell>
-                <TableCell>{row.amount}</TableCell>
+                <TableCell>{formatAmount(row.amount, row.currency)}</TableCell>
                 <TableCell>{row.paymentAt}</TableCell>
               </TableRow>
             ))
