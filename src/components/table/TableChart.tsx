@@ -1,4 +1,4 @@
-import { IconLoader } from '@tabler/icons-react';
+import { IconBan, IconCircleCheckFilled, IconLoader, IconX } from '@tabler/icons-react';
 
 import { Badge } from '@/components/ui/badge';
 import {
@@ -11,6 +11,20 @@ import {
 } from '@/components/ui/table';
 
 import type { Payment } from '@/api/payments/type';
+
+function getStatusIcon(status: Payment['status']) {
+  switch (status) {
+    case 'SUCCESS':
+      return <IconCircleCheckFilled className='mr-1 w-5 h-5 fill-green-500' />;
+    case 'FAILED':
+      return <IconX className='mr-1 w-5 h-5 text-red-500' />;
+    case 'CANCELLED':
+      return <IconBan className='mr-1 w-5 h-5 text-gray-500' />;
+    case 'PENDING':
+    default:
+      return <IconLoader className='mr-1 w-5 h-5 text-yellow-500' />;
+  }
+}
 
 export default function TableChart({ data }: { data: Payment[] }) {
   return (
@@ -43,6 +57,7 @@ export default function TableChart({ data }: { data: Payment[] }) {
                 </TableCell>
                 <TableCell>
                   <Badge variant='outline' className='text-muted-foreground  rounded-full'>
+                    {getStatusIcon(row.status)}
                     <IconLoader className='mr-1 w-5' />
                     {row.status}
                   </Badge>
