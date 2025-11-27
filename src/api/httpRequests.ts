@@ -1,8 +1,8 @@
 import type { AxiosRequestConfig } from 'axios';
 
-import instance from '../instance';
+import instance from './instance';
 
-/* GET 요청 */
+/* GET */
 export const getRequest = async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
   const response = await instance.get(url, config);
   return response.data;
