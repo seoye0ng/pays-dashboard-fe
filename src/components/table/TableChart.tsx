@@ -11,13 +11,7 @@ import {
 } from '@/components/ui/table';
 
 import type { Payment } from '@/api/payments/type';
-
-function formatAmount(amount: string, currency: string) {
-  return new Intl.NumberFormat('ko-KR', {
-    style: 'currency',
-    currency,
-  }).format(Number(amount));
-}
+import { formatDate, formatAmount } from '@/utils/formatUtils';
 
 function getStatusIcon(status: Payment['status']) {
   switch (status) {
@@ -72,7 +66,7 @@ export default function TableChart({ data }: { data: Payment[] }) {
                   </Badge>
                 </TableCell>
                 <TableCell>{formatAmount(row.amount, row.currency)}</TableCell>
-                <TableCell>{row.paymentAt}</TableCell>
+                <TableCell>{formatDate(row.paymentAt)}</TableCell>
               </TableRow>
             ))
           ) : (
