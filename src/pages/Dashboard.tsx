@@ -13,9 +13,7 @@ export default function DashboardPage() {
   if (error) return <div>Error loading payments</div>;
   if (!paymentsData || paymentsData.length === 0) return <div>No payments found</div>;
 
-  const dateDescription = stats.latestDate
-    ? `가장 최근 일자 (${stats.latestDate})`
-    : '가장 최근 일자';
+  const dateDescription = stats.latestDate ? `최근 (${stats.latestDate})` : '최근';
 
   return (
     <div className='space-y-6'>
