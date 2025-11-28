@@ -17,9 +17,13 @@ export function usePayments(payments: Payment[] = [], days: number = 7): Payment
     const recentPayments = payments.filter((p) => new Date(p.paymentAt) >= fromDate);
     const recentCount = recentPayments.length;
 
+    const recentTotalAmount = recentPayments
+      .filter((p) => p.status === 'SUCCESS')
+      .reduce((sum, p) => sum + Number(p.amount), 0);
+
     return {
       recentCount,
-      recentTotalAmount: 0,
+      recentTotalAmount,
       successRate: 0,
       failureRate: 0,
     };
