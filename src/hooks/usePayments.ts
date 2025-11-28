@@ -21,11 +21,17 @@ export function usePayments(payments: Payment[] = [], days: number = 7): Payment
       .filter((p) => p.status === 'SUCCESS')
       .reduce((sum, p) => sum + Number(p.amount), 0);
 
+    const successCount = recentPayments.filter((p) => p.status === 'SUCCESS').length;
+    const failureCount = recentPayments.filter((p) => p.status === 'FAILED').length;
+
+    const successRate = (successCount / recentCount) * 100;
+    const failureRate = (failureCount / recentCount) * 100;
+
     return {
       recentCount,
       recentTotalAmount,
-      successRate: 0,
-      failureRate: 0,
+      successRate: Number(successRate.toFixed(2)),
+      failureRate: Number(failureRate.toFixed(2)),
     };
   }, [payments, days]);
 }
