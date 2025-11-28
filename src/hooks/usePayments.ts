@@ -9,13 +9,19 @@ interface Payments {
 }
 
 export function usePayments(payments: Payment[] = [], days: number = 7): Payments {
-  return useMemo(
-    () => ({
-      recentCount: 0,
+  return useMemo(() => {
+    const now = new Date();
+    const fromDate = new Date(now);
+    fromDate.setDate(now.getDate() - days);
+
+    const recentPayments = payments.filter((p) => new Date(p.paymentAt) >= fromDate);
+    const recentCount = recentPayments.length;
+
+    return {
+      recentCount,
       recentTotalAmount: 0,
       successRate: 0,
       failureRate: 0,
-    }),
-    [payments, days],
-  );
+    };
+  }, [payments, days]);
 }
